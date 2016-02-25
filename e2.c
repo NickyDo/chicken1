@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#define max 100
+#define max 1000
 
 void charrw(FILE*fin);
 void main(int argc, char* argv[]){
