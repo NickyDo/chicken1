@@ -69,44 +69,41 @@ void main(void){
       srand(time(NULL));
       n=1+rand()%10;
       printf("So duong tron muon sinh ra:%d\n", n);
-    
+     circle_t *c1 = (circle_t*)malloc(n*sizeof(circle_t)) ;
       for(i = 0; i < n; i++){
-        srand(time(NULL));
-	c[i].center.x=1+rand()%10;
-	srand(time(NULL));
-	c[i].center.y=1+rand()%10;
-        srand(time(NULL));
-	c[i].radius=1+rand()%10;
-	printf("Duong tron thu %d co tam I%d(%.2lf,%.2lf), Ban kinh R%d = %.2lf\n", i + 1, i + 1, c[i].center.x, c[i].center.y, i + 1, c[i].radius);
-	/*      
-	printf("Nhap toa do cua duong tron thu %d\n", i+1);
-	scanf("%lf%lf", &c[i].center.x, &c[i].center.y);
-	printf("Nhap ban kinh cua duong tron thu %d\n", i+1);
-	scanf("%lf", &c[i].radius);*/
-	c[i].count = 0;
+      
+	c1[i].center.x=1+rand()%5;
+
+	c1[i].center.y=5+rand()%11;
+    
+	c1[i].radius=6+rand()%12;
+	c1[i].count = 0;
       }
-     
+      
+	for(i = 0; i < n; ++i)
+     	printf("Duong tron thu %d co tam I%d(%.2lf,%.2lf), Ban kinh R%d = %.2lf\n", i + 1, i + 1, c1[i].center.x, c1[i].center.y, i + 1, c1[i].radius);
+
       for(i = 0; i < n - 1; i++)
 	for(j = i+1 ; j < n; j++)
-	  if(giaonh(c[i], c[j]) == 1)
+	  if(giaonh(c1[i], c1[j]) == 1)
 	    {
-	      c[i].giaonhau[(c[i].count)] = j + 1;
-	      c[j].giaonhau[(c[j].count)] = i + 1;
-	      c[i].count++;
-	      c[j].count++;
+	      c1[i].giaonhau[(c1[i].count)] = j + 1;
+	      c1[j].giaonhau[(c1[j].count)] = i + 1;
+	      c1[i].count++;
+	      c1[j].count++;
 	    }
       for(i = 0; i < n; ++i)
-	if(c[i].count > max)
-	  max = c[i].count;
+	if(c1[i].count > max)
+	  max = c1[i].count;
       
 		for(i = 0; i < n; ++i)
-		if(c[i].count == max)
+		if(c1[i].count == max)
 	    {
 	    printf("Duong tron thu %d co giao voi tat ca cac duong con lai\n", i + 1);
       
 	for(j = 0; j < n; ++j)
-	  if(c[i].giaonhau[j] > 0){
-	    printf("vong tron thu %d giao voi vong tron thu %d\n",i + 1, c[i].giaonhau[j]);}
+	  if(c1[i].giaonhau[j] > 0){
+	    printf("vong tron thu %d giao voi vong tron thu %d\n",i + 1, c1[i].giaonhau[j]);}
 	    }
       
       break;
