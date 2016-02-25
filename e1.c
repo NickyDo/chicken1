@@ -60,14 +60,12 @@ void main(void){
 	      if(c[i].giaonhau[j] > 0){
 		printf("vong tron thu %d giao voi vong tron thu %d\n",i + 1, c[i].giaonhau[j]);}
 	  }
-      
       free(c);
-      
       break;
-    case 2:
       
+    case 2:
       srand(time(NULL));
-      n=1+rand()%10;
+      n=2+rand()%8;
       printf("So duong tron muon sinh ra:%d\n", n);
       circle_t *c1 = (circle_t*)malloc(n*sizeof(circle_t)) ;
       for(i = 0; i < n; i++){
@@ -102,8 +100,9 @@ void main(void){
 		if(c1[i].giaonhau[j] > 0){
 		  printf("vong tron thu %d giao voi vong tron thu %d\n",i + 1, c1[i].giaonhau[j]);}
 	    }
-	
+	free(c1);
 	break;
+	
     case 3: printf("ending...\n"); break;
     default: printf("wrong\n");
     }
