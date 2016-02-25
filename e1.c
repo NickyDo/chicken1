@@ -51,62 +51,59 @@ void main(void){
 	if(c[i].count > max)
 	  max = c[i].count;
       
-		for(i = 0; i < n; ++i)
-		if(c[i].count == max)
-	    {
+      for(i = 0; i < n; ++i)
+	if(c[i].count == max)
+	  {
 	    printf("Duong tron thu %d co giao voi tat ca cac duong con lai\n", i + 1);
+	    
+	    for(j = 0; j < n; ++j)
+	      if(c[i].giaonhau[j] > 0){
+		printf("vong tron thu %d giao voi vong tron thu %d\n",i + 1, c[i].giaonhau[j]);}
+	  }
       
-	for(j = 0; j < n; ++j)
-	  if(c[i].giaonhau[j] > 0){
-	    printf("vong tron thu %d giao voi vong tron thu %d\n",i + 1, c[i].giaonhau[j]);}
-	    }
-    
       free(c);
-    
+      
       break;
     case 2:
       
       srand(time(NULL));
       n=1+rand()%10;
       printf("So duong tron muon sinh ra:%d\n", n);
-     circle_t *c1 = (circle_t*)malloc(n*sizeof(circle_t)) ;
+      circle_t *c1 = (circle_t*)malloc(n*sizeof(circle_t)) ;
       for(i = 0; i < n; i++){
-      
-	c1[i].center.x=1+rand()%5;
-
+	c1[i].center.x=1+rand()%5;	
 	c1[i].center.y=5+rand()%11;
-    
 	c1[i].radius=6+rand()%12;
 	c1[i].count = 0;
       }
       
 	for(i = 0; i < n; ++i)
-     	printf("Duong tron thu %d co tam I%d(%.2lf,%.2lf), Ban kinh R%d = %.2lf\n", i + 1, i + 1, c1[i].center.x, c1[i].center.y, i + 1, c1[i].radius);
-
-      for(i = 0; i < n - 1; i++)
-	for(j = i+1 ; j < n; j++)
-	  if(giaonh(c1[i], c1[j]) == 1)
+	  printf("Duong tron thu %d co tam I%d(%.2lf,%.2lf), Ban kinh R%d = %.2lf\n", i + 1, i + 1, c1[i].center.x, c1[i].center.y, i + 1, c1[i].radius);
+	
+	for(i = 0; i < n - 1; i++)
+	  for(j = i+1 ; j < n; j++)
+	    if(giaonh(c1[i], c1[j]) == 1)
+	      {
+		c1[i].giaonhau[(c1[i].count)] = j + 1;
+		c1[j].giaonhau[(c1[j].count)] = i + 1;
+		c1[i].count++;
+		c1[j].count++;
+	      }
+	for(i = 0; i < n; ++i)
+	  if(c1[i].count > max)
+	    max = c1[i].count;
+	
+	for(i = 0; i < n; ++i)
+	  if(c1[i].count == max)
 	    {
-	      c1[i].giaonhau[(c1[i].count)] = j + 1;
-	      c1[j].giaonhau[(c1[j].count)] = i + 1;
-	      c1[i].count++;
-	      c1[j].count++;
+	      printf("Duong tron thu %d co giao voi tat ca cac duong con lai\n", i + 1);
+	      
+	      for(j = 0; j < n; ++j)
+		if(c1[i].giaonhau[j] > 0){
+		  printf("vong tron thu %d giao voi vong tron thu %d\n",i + 1, c1[i].giaonhau[j]);}
 	    }
-      for(i = 0; i < n; ++i)
-	if(c1[i].count > max)
-	  max = c1[i].count;
-      
-		for(i = 0; i < n; ++i)
-		if(c1[i].count == max)
-	    {
-	    printf("Duong tron thu %d co giao voi tat ca cac duong con lai\n", i + 1);
-      
-	for(j = 0; j < n; ++j)
-	  if(c1[i].giaonhau[j] > 0){
-	    printf("vong tron thu %d giao voi vong tron thu %d\n",i + 1, c1[i].giaonhau[j]);}
-	    }
-      
-      break;
+	
+	break;
     case 3: printf("ending...\n"); break;
     default: printf("wrong\n");
     }
