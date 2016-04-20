@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "stack.h"
-typedef char element_type1;
+typedef int element_type1;
 typedef struct tNode tNode;
 struct tNode{
   element_type data;
@@ -130,19 +130,19 @@ int isoperator(char c){
   return 0;
 }
 
-Node *constructTree(char postfix[])
+tNode *constructTree(char postfix[])
 {
   int i;
   stack_type *p;
   p = (stack_type *)malloc(sizeof(stack_type));
   initialize(p);
   tNode *t, *t1, *t2;
-  for(i = 0;  i<strlen(postfix); i++)
+  for(i = 0; i<strlen(postfix); i++)
     {
-      if(isoperator(postfix))
+      if(isoperator(postfix[i]) == 1)
 	{
 	  t = GetNewNode(postfix[i]);
-	  push(&t, p);
+	  push(t, p);
 	}
       else
 	{
@@ -155,7 +155,7 @@ Node *constructTree(char postfix[])
 	  t->right = t1;
 	  t->left = t2;
 
-	  push(&t, p);
+	  push(t, p);
 	}
     }
   t = p->top;
