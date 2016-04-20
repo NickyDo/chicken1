@@ -1,27 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "stack.h"
-typedef char element_type;
-typedef struct Node Node;
-struct Node{
+typedef char element_type1;
+typedef struct tNode tNode;
+struct tNode{
   element_type data;
-  Node *left;
-  Node *right;
+  tNode *left;
+  tNode *right;
 };
 
-Node* GetNewNode(element_type data){
-  Node *NewNode = (Node *)malloc(sizeof(Node));
+tNode* GetNewNode(element_type1 data){
+  tNode *NewNode = (tNode *)malloc(sizeof(tNode));
   NewNode->data = data;
   NewNode->left = NULL;
   NewNode->right = NULL;
   return NewNode;
 }
 
-int emptytree(Node root){
+int emptytree(tNode *root){
   return root == NULL;
 }
 
-void freetree(Node root){
+void freetree(tNode *root){
   if(emptytree(root)) return;
   freetree(root->left);
   freetree(root->right);
@@ -29,24 +29,24 @@ void freetree(Node root){
   return;
 }
 
-Node* leftchild(Node* root){
+tNode* leftchild(tNode* root){
   if(root == NULL) return NULL;
   else
     return (root->left);
 }
 
-Node* rightchild(Node* root){
+tNode* rightchild(tNode* root){
   if(root == NULL) return NULL;
   else
     return (root->right);
 }
 
-int isleaf(Node *root){
+int isleaf(tNode *root){
 if(root != NULL) return((leftchild(root) == NULL) && (rightchild(root) == NULL));
   return -1;
 }
 
-int countNode(Node *root){
+int countNode(tNode *root){
   int l, r;
   if(root == NULL) return 0;
   else{
@@ -56,7 +56,7 @@ int countNode(Node *root){
   }
 }
 
-int numberofleaf(Node *root){
+int numberofleaf(tNode *root){
   int countl, countr, n = 0;
   if(root == NULL)
     return 0;
@@ -77,13 +77,13 @@ int max(int x1, int x2){
   return maxi;
 }
 
-int findHeight(Node *root){
+int findHeight(tNode *root){
   if(root == NULL)
     return -1;
   return max(findHeight(root->left), findHeight(root->right)) + 1;
 }
 
-void preorder(Node *root){
+void preorder(tNode *root){
   if(root == NULL) return;
   else{
     printf("%d ", root->data);
@@ -92,7 +92,7 @@ void preorder(Node *root){
   }
 }
 
-void inorder(Node *root){
+void inorder(tNode *root){
   if(root == NULL) return;
   else{
    inorder(root->left);
@@ -101,7 +101,7 @@ void inorder(Node *root){
   }
 }
 
-void postorder(Node *root){
+void postorder(tNode *root){
   if(root == NULL) return;
   else{
     postorder(root->left);
@@ -136,13 +136,13 @@ Node *constructTree(char postfix[])
   stack_type *p;
   p = (stack_type *)malloc(sizeof(stack_type));
   initialize(p);
-  Node *t, *t1, *t2;
-  for(i = 0;  i<strlen(postfox); i++)
+  tNode *t, *t1, *t2;
+  for(i = 0;  i<strlen(postfix); i++)
     {
       if(isoperator(postfix))
 	{
 	  t = GetNewNode(postfix[i]);
-	  push(t, p);
+	  push(&t, p);
 	}
       else
 	{
@@ -155,7 +155,7 @@ Node *constructTree(char postfix[])
 	  t->right = t1;
 	  t->left = t2;
 
-	  push(t, p);
+	  push(&t, p);
 	}
     }
   t = p->top;
