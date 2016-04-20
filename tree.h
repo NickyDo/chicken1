@@ -130,6 +130,7 @@ int isoperator(char c){
   return 0;
 }
 
+// postfix expression
 tNode *constructTree(char postfix[])
 {
   int i;
@@ -137,29 +138,36 @@ tNode *constructTree(char postfix[])
   p = (stack_type *)malloc(sizeof(stack_type));
   initialize(p);
   tNode *t, *t1, *t2;
+  // Traverse through every character of
+  // input expression
   for(i = 0; i<strlen(postfix); i++)
     {
+      // If operand, simply push into stack
       if(isoperator(postfix[i]) == 1)
 	{
 	  t = GetNewNode(postfix[i]);
 	  push(t, p);
 	}
-      else
+      else // operator
 	{
 	  t = GetNewNode(postfix[i]);
-	  t1 = p->top;
-	  pop(p);
+	  // Pop two top nodes
+	  t1 = p->top;//store top
+	  pop(p); //remove top
 	  t2 = p->top;
 	  pop(p);
-
+	  //  make them children
 	  t->right = t1;
 	  t->left = t2;
-
+	  // Add this subexpression to stack
 	  push(t, p);
 	}
     }
+
+  //  only element will be root of expression
+  // tree
   t = p->top;
   pop(p);
-  return t;
-	  
+  
+  return t;	  
 }
