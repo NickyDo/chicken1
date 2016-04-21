@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "stack.h"
-typedef int element_type1;
+typedef char element_type1;
 typedef struct tNode tNode;
 struct tNode{
-  element_type data;
+  element_type1 data;
   tNode *left;
   tNode *right;
 };
@@ -143,7 +143,7 @@ tNode *constructTree(char postfix[])
   for(i = 0; i<strlen(postfix); i++)
     {
       // If operand, simply push into stack
-      if(isoperator(postfix[i]) == 1)
+      if(!isoperator(postfix[i]))
 	{
 	  t = GetNewNode(postfix[i]);
 	  push(t, p);
@@ -152,9 +152,9 @@ tNode *constructTree(char postfix[])
 	{
 	  t = GetNewNode(postfix[i]);
 	  // Pop two top nodes
-	  t1 = p->top;//store top
+	  t1 = p->top->info;//store top
 	  pop(p); //remove top
-	  t2 = p->top;
+	  t2 = p->top->info;
 	  pop(p);
 	  //  make them children
 	  t->right = t1;
@@ -166,7 +166,7 @@ tNode *constructTree(char postfix[])
 
   //  only element will be root of expression
   // tree
-  t = p->top;
+  t = p->top->info;
   pop(p);
   
   return t;	  

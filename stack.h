@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef char element_type;
+
 typedef struct Node Node;
 typedef struct Node{
-	element_type info;
+	void* info;
 	Node *link;
 } Node;
 
@@ -24,12 +24,12 @@ Node *makeNode()
 	return t;		
 }
 
-void initialize(stack_type *stack)
+stack_type *initialize(stack_type *stack)
 {
 	stack->top == NULL;
 }
 
-void push(element_type val, stack_type *stack){
+void push(void* val, stack_type *stack){
 Node *p;
 p = makeNode();
 p->info = val;
@@ -37,9 +37,9 @@ p->link = stack->top;
 stack->top = p;
 }
 
-element_type pop(stack_type *stack)
+void* pop(stack_type *stack)
 {
-	element_type val;
+	void* val;
 	Node *p = makeNode();
 	if (empty(stack))
 	  {
