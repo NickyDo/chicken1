@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define SWAP(x , y) do { typeof(x) SWAP = (x); (x) = (y) ; (y) =SWAP;} while (0);
 
 typedef struct Node Node;
 struct Node{
@@ -174,4 +175,11 @@ int IsBinarySearchTree(Node *root){
   else
     return 1;
     
+}
+
+int reverseTree(Node *root){
+  if(root == NULL) return 0;
+  if(root != NULL)
+    SWAP(root->left, root->right);
+  return (root->left && root->right);
 }
