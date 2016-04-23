@@ -177,9 +177,10 @@ int IsBinarySearchTree(Node *root){
     
 }
 
-int reverseTree(Node *root){
-  if(root == NULL) return 0;
-  if(root != NULL)
+void reverseTree(Node *root){
+  if(root != NULL){
     SWAP(root->left, root->right);
-  return (root->left && root->right);
+  if(root->left != NULL) return reverseTree(root->left);
+  if(root->right != NULL) return reverseTree(root->right);
+  }
 }
