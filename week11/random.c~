@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include "bst.h"
+
+Tree_type root;
+void main(int argc, char *argv[]){
+  FILE *f1;
+  int so, i, choice;
+  if(argc != 2) printf("wrong\n");
+  else{
+    if((f1 = fopen(argv[1], "w+")) == NULL) printf("something wrong\n");
+    else{
+      do{
+	printf("1. Tao bo so lieu va tao cay\n");
+	printf("2. In ra chieu cao cua cay\n");
+	printf("3. Tim kiem\n");
+	printf("4. In ra so phep so sanh\n");
+	printf("5. exit\n");
+	scanf("%d", &choice);
+	switch(choice){
+       srand(time(NULL));
+      for(i = 0; i < 100; i++){
+
+      fprintf(f1, "%d\n", so = rand()%101);
+      root = Insert(root, so);
+      // printf("%d\n", so);
+      }
+      fclose(f1);
+       inorder(root);
+       printf("\n");
+       printf("height of tree is: %d\n", findHeight(root));
+	}
+      }while(choice != 5);
+    }      
+  }  
+}
+
+
+
