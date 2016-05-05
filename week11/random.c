@@ -33,7 +33,8 @@ void main(){
 	  freeTree(root);
 	  break;
 	case 3:
-	   printf("number of comparision: %d\n", height(root));
+	  inorder(root);
+	  printf("number of comparision: %d\n", height(root));
 	  
 	  break;
 	case 4:

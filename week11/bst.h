@@ -114,7 +114,7 @@ int height(tree_type tree) {
 	return 1 + (ld > rd ? ld : rd);
 }
 
-void preOrder(tree_type tree, void (*order)(tree_type))
+/*void preOrder(tree_type tree, void (*order)(tree_type))
 {
 	if (tree != NULL)
 	{
@@ -157,4 +157,30 @@ void reverseTree(tree_type *tree) {
 		(*tree)->left = (*tree)->right;
 		(*tree)->right = temp;
 	}
+}
+
+*/
+void preorder(TNode *root){
+  if(root == NULL) return;
+  else{
+    printf("%d ", root->info);
+    preorder(root->left);
+    preorder(root->right); 
+  }
+}
+void inorder(TNode *root){
+  if(root == NULL) return;
+  else{
+    inorder(root->left);
+    printf("%d ", root->info);
+    inorder(root->right);    
+  }
+}
+void postorder(TNode *root){
+  if(root == NULL) return;
+  else{
+    postorder(root->left);
+    postorder(root->right);
+    printf("%d ", root->info); 
+  }
 }
