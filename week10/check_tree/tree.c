@@ -1,4 +1,4 @@
-#include "BST.h"
+#include "bst.h"
 
 int main() {
   TNode *root = NULL;  // Creating an empty tree
